@@ -26,49 +26,42 @@ It instantly scaffolds fully-tested, decoupled, and highly cohesive module struc
 
 ## 📦 Installation
 
-To use this CLI tool locally or globally on your machine, first clone this repository and link it.
+To use this CLI tool locally or globally on your machine, you can install it directly from NPM.
 
 ```bash
-# Clone the repository
-git clone https://github.com/saul-paulus/node-module-generator.git
-cd node-module-generator
-
-# Install dependencies
-npm install
-
-# Link package globally (creates the 'make' command)
-npm link
+# Install globally via NPM
+npm install -g @saulpaulus17/node-module-generator
 ```
 
 ## 🚀 Usage
 
-Once installed or linked globally, you can execute the CLI commands from any of your Node.js project directories using the `make` command keyword.
+Once installed globally, you can execute the CLI commands from any of your Node.js project directories using the `nmg` command keyword.
 
 ### Granular CLI Commands
 Scaffold specifically what you need, exactly how you do it in NestJS:
 
 ```bash
 # 1. Scaffolds a new module architecture and empty DI registry
-make module product
+nmg module product
 
 # 2. Creates a specific Use Case and its Test inside an existing module
-make usecase updateProduct --module=product
+nmg usecase updateProduct --module=product
 
 # 3. Creates Domain Entity and Repository Interfaces/Implementations
-make repository product
+nmg repository product
 
 # 4. Scaffolds a DTO validation schema
-make dto getProduct --module=product
+nmg dto getProduct --module=product
 
 # 5. Generates an entire full-stack CRUD Resource (Controller, Entity, Repos, DI, etc.)
-make resource order
+nmg resource order
 ```
 
-_(Note: If you haven't linked the package, or if you wish to avoid conflicts with your operating system's native `make` utility, you can run it locally via `node ./bin/cli.js <command> <name>`)_
+_(Note: If you haven't installed the package globally, you can run it via `npx @saulpaulus17/node-module-generator <command> <name>`)_
 
 ## 📂 Full Resource Structure
 
-Running the powerhouse command `make resource user` instantly generates the following decoupled blueprint within your project's `src/modules` directory:
+Running the powerhouse command `nmg resource user` instantly generates the following decoupled blueprint within your project's `src/modules` directory:
 
 ```text
 src/modules/user/
