@@ -1,6 +1,11 @@
 <div align="center">
   <h1>🚀 Node Module Generator</h1>
   <p>A robust CLI tool for scaffolding Express.js projects using Clean Architecture & Dependency Injection.</p>
+  <p>
+    <a href="https://github.com/saul-paulus/node-module-generator/actions/workflows/ci.yml">
+      <img src="https://github.com/saul-paulus/node-module-generator/actions/workflows/ci.yml/badge.svg" alt="CI Status">
+    </a>
+  </p>
 </div>
 
 ---
@@ -16,6 +21,7 @@ It instantly scaffolds fully-tested, decoupled, and highly cohesive module struc
 - 🏗️ **Clean Architecture by Default**: Automatically separates concerns into Domain, Application, Infrastructure, and Interface layers.
 - 💉 **Dependency Injection Ready**: Auto-generates Awilix configurations mapped correctly across use cases, controllers, and repositories.
 - 🧪 **Test-Driven Design**: Scaffolds adjoining `*.test.js` files containing boilerplates for Jest to promote TDD.
+- 🤖 **Continuous Integration**: Codebase natively incorporates GitHub Actions for automated unit testing checks.
 - 🧩 **Granular Scaffolding**: Generate specific components (UseCases, Repositories, DTOs) dynamically on demand without overriding existing folders!
 
 ## 📦 Installation
