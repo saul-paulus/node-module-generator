@@ -16,7 +16,7 @@ It instantly scaffolds fully-tested, decoupled, and highly cohesive module struc
 - 🏗️ **Clean Architecture by Default**: Automatically separates concerns into Domain, Application, Infrastructure, and Interface layers.
 - 💉 **Dependency Injection Ready**: Auto-generates Awilix configurations mapped correctly across use cases, controllers, and repositories.
 - 🧪 **Test-Driven Design**: Scaffolds adjoining `*.test.js` files containing boilerplates for Jest to promote TDD.
-- ⚡ **Rapid Development**: Generates complete boilerplate files (DTOs, Repositories, Domain Entities, Routes) saving you hours of tedious setup.
+- 🧩 **Granular Scaffolding**: Generate specific components (UseCases, Repositories, DTOs) dynamically on demand without overriding existing folders!
 
 ## 📦 Installation
 
@@ -30,27 +30,39 @@ cd node-module-generator
 # Install dependencies
 npm install
 
-# Link package globally (creates the 'nmg' command)
+# Link package globally (creates the 'make' command)
 npm link
 ```
 
 ## 🚀 Usage
 
-Once installed or linked globally, you can execute the CLI commands from any of your Node.js project directories.
+Once installed or linked globally, you can execute the CLI commands from any of your Node.js project directories using the `make` command keyword.
+
+### Granular CLI Commands
+Scaffold specifically what you need, exactly how you do it in NestJS:
 
 ```bash
-# Create a completely robust module with Awilix & Clean Architecture
-nmg module <module-name>
+# 1. Scaffolds a new module architecture and empty DI registry
+make module product
 
-# Example:
-nmg module user-profile
+# 2. Creates a specific Use Case and its Test inside an existing module
+make usecase updateProduct --module=product
+
+# 3. Creates Domain Entity and Repository Interfaces/Implementations
+make repository product
+
+# 4. Scaffolds a DTO validation schema
+make dto getProduct --module=product
+
+# 5. Generates an entire full-stack CRUD Resource (Controller, Entity, Repos, DI, etc.)
+make resource order
 ```
 
-_(Note: If you haven't linked the package, you can also run it locally via `node /path/to/node-module-generator/bin/cli.js module <name>`)_
+_(Note: If you haven't linked the package, or if you wish to avoid conflicts with your operating system's native `make` utility, you can run it locally via `node ./bin/cli.js <command> <name>`)_
 
-## 📂 Generated Structure
+## 📂 Full Resource Structure
 
-Running `nmg module user` generates the following structural blueprint within your project's `src/modules` directory:
+Running the powerhouse command `make resource user` instantly generates the following decoupled blueprint within your project's `src/modules` directory:
 
 ```text
 src/modules/user/
@@ -68,7 +80,7 @@ src/modules/user/
 │   ├── repositories/            # Implementations (mocked to replace with Prisma/TypeORM)
 │   │   └── user.repository.impl.js
 │   └── validation/              # Input validation schemas
-│       └── create-user.schema.js       # Auto-stubbed for Joi or Zod
+│       └── create-user.schema.js       # Auto-stubbed validation schema
 ├── interfaces/                  # Entry Points (Web/API)
 │   ├── controllers/
 │   │   ├── user.controller.js          # Express.js class handlers
