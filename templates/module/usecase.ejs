@@ -1,0 +1,15 @@
+class Create<%= className %>UseCase {
+  constructor({ <%= camelName %>Repository }) {
+    this.<%= camelName %>Repository = <%= camelName %>Repository;
+  }
+
+  async execute(dto) {
+    // Validate DTO...
+    // Apply business logic...
+    
+    const entity = await this.<%= camelName %>Repository.save(dto);
+    return entity;
+  }
+}
+
+module.exports = Create<%= className %>UseCase;

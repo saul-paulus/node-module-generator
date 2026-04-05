@@ -1,0 +1,9 @@
+const { Router } = require('express');
+
+module.exports = function({ <%= camelName %>Controller }) {
+  const router = Router();
+
+  router.post('/', <%= camelName %>Controller.create);
+
+  return router;
+};

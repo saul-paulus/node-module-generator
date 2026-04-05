@@ -1,0 +1,16 @@
+class <%= className %>Controller {
+  constructor({ <%= camelName %>UseCase }) {
+    this.<%= camelName %>UseCase = <%= camelName %>UseCase;
+  }
+
+  create = async (req, res, next) => {
+    try {
+      const result = await this.<%= camelName %>UseCase.execute(req.body);
+      res.status(201).json({ success: true, data: result });
+    } catch (error) {
+      next(error);
+    }
+  };
+}
+
+module.exports = <%= className %>Controller;

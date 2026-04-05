@@ -1,0 +1,16 @@
+const { asClass, asFunction } = require('awilix');
+
+const <%= className %>Controller = require('./interfaces/controllers/<%= name %>.controller');
+const create<%= className %>Routes = require('./interfaces/routes/<%= name %>.routes');
+const Create<%= className %>UseCase = require('./application/usecases/create-<%= name %>.usecase');
+const <%= className %>Repository = require('./infrastructure/repositories/<%= name %>.repository.impl');
+
+module.exports = function register<%= className %>Module(container) {
+  container.register({
+    <%= camelName %>Controller: asClass(<%= className %>Controller).singleton(),
+    <%= camelName %>Routes: asFunction(create<%= className %>Routes).singleton(),
+    <%= camelName %>UseCase: asClass(Create<%= className %>UseCase).singleton(),
+    // Providing the interface's name as the injection token for the implementation
+    <%= camelName %>Repository: asClass(<%= className %>Repository).singleton(),
+  });
+};
