@@ -5,6 +5,15 @@
     <a href="https://github.com/saul-paulus/node-module-generator/actions/workflows/ci.yml">
       <img src="https://github.com/saul-paulus/node-module-generator/actions/workflows/ci.yml/badge.svg" alt="CI Status">
     </a>
+    <a href="https://www.npmjs.com/package/@saulpaulus17/node-module-generator">
+      <img src="https://img.shields.io/npm/v/@saulpaulus17/node-module-generator.svg" alt="NPM Version" />
+    </a>
+    <a href="https://www.npmjs.com/package/@saulpaulus17/node-module-generator">
+      <img src="https://img.shields.io/npm/dt/@saulpaulus17/node-module-generator.svg" alt="NPM Downloads" />
+    </a>
+    <a href="https://github.com/saul-paulus/node-module-generator/blob/main/LICENSE">
+      <img src="https://img.shields.io/npm/l/@saulpaulus17/node-module-generator.svg" alt="License" />
+    </a>
   </p>
 </div>
 
@@ -25,6 +34,10 @@ It instantly scaffolds fully-tested, decoupled, and highly cohesive module struc
 - 🧩 **Granular Scaffolding**: Generate specific components (UseCases, Repositories, DTOs) dynamically on demand without overriding existing folders!
 
 ## 📦 Installation
+
+### Prerequisites
+- **Node.js**: v18.0.0 or higher.
+- **NPM** or **Yarn**.
 
 To use this CLI tool locally or globally on your machine, you can install it directly from NPM.
 
@@ -97,6 +110,14 @@ The scaffolded code integrates perfectly if you are using the following librarie
 - **[Awilix](https://github.com/jeffijoe/awilix)** - Powerful Dependency Injection container
 - **[Jest](https://jestjs.io/)** - For the colocated testing environments
 - **[Joi](https://joi.dev/)** - For infrastructure schema validations
+
+## 🤝 Contributing
+
+Contributions are always welcome! Feel free to open issues or submit Pull Requests.
+1. Fork the repo and create your branch (`git checkout -b feature/amazing-feature`).
+2. Commit your changes (`git commit -m 'feat: add amazing feature'`).
+3. Push to the branch (`git push origin feature/amazing-feature`).
+4. Open a Pull Request.
 
 ## 📝 License
 
