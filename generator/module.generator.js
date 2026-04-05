@@ -23,39 +23,12 @@ module.exports = async function (name) {
   // Create directories
   dirs.forEach((dir) => fs.ensureDirSync(path.join(basePath, dir)));
 
-  const templateData = {
-    name,
-    className: pascalCase(name),
-    camelName: camelCase(name),
-  };
-
-  const renderAndWrite = async (templateName, outputPath) => {
-    const templateContent = await ejs.renderFile(
-      path.join(__dirname, "../templates/module", templateName),
-      templateData
-    );
-    fs.writeFileSync(path.join(basePath, outputPath), templateContent);
-  };
-
-  // Interfaces
-  await renderAndWrite("controller.ejs", `interfaces/controllers/${name}.controller.js`);
-  await renderAndWrite("controller.test.ejs", `interfaces/controllers/${name}.controller.test.js`);
-  await renderAndWrite("route.ejs", `interfaces/routes/${name}.routes.js`);
-
-  // Application
-  await renderAndWrite("usecase.ejs", `application/usecases/create-${name}.usecase.js`);
-  await renderAndWrite("usecase.test.ejs", `application/usecases/create-${name}.usecase.test.js`);
-
-  // Domain
-  await renderAndWrite("entity.ejs", `domain/entities/${name}.entity.js`);
-  await renderAndWrite("repository.interface.ejs", `domain/repositories/${name}.repository.interface.js`);
-
-  // Infrastructure
-  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/${name}.repository.impl.js`);
-  await renderAndWrite("dto.ejs", `infrastructure/validation/create-${name}.schema.js`);
-
-  // DI Setup
-  await renderAndWrite("di.ejs", `${name}.module.js`);
-
-  console.log(`✔ Module ${name} generated successfully with Clean Architecture and Awilix DI!`);
+  console.log(`✔ Module ${name} directory structure created.`);
+  
+  // Optionally create an empty module DI file
+  const diFile = path.join(basePath, `${name}.module.js`);
+  if (!fs.existsSync(diFile)) {
+    fs.writeFileSync(diFile, `module.exports = function register${pascalCase(name)}Module(container) {\n  container.register({\n    // Inject dependencies here\n  });\n};\n`);
+    console.log(`✔ Module DI registry ${name}.module.js created.`);
+  }
 };

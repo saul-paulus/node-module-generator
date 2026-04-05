@@ -1,6 +1,6 @@
-const Create<%= className %>UseCase = require('./create-<%= name %>.usecase');
+const <%= useCaseClassName %> = require('./<%= useCaseFileName %>.usecase');
 
-describe('Create<%= className %>UseCase', () => {
+describe('<%= useCaseClassName %>', () => {
   let useCase;
   let mockRepository;
 
@@ -8,7 +8,7 @@ describe('Create<%= className %>UseCase', () => {
     mockRepository = {
       save: jest.fn()
     };
-    useCase = new Create<%= className %>UseCase({ <%= camelName %>Repository: mockRepository });
+    useCase = new <%= useCaseClassName %>({ <%= camelName %>Repository: mockRepository });
   });
 
   describe('execute', () => {

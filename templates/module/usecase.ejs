@@ -1,4 +1,4 @@
-class Create<%= className %>UseCase {
+class <%= useCaseClassName %> {
   constructor({ <%= camelName %>Repository }) {
     this.<%= camelName %>Repository = <%= camelName %>Repository;
   }
@@ -12,4 +12,4 @@ class Create<%= className %>UseCase {
   }
 }
 
-module.exports = Create<%= className %>UseCase;
+module.exports = <%= useCaseClassName %>;
