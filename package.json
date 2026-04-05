@@ -1,0 +1,18 @@
+{
+  "name": "node-module-generator",
+  "version": "1.0.0",
+  "description": "CLI tool to grenerate modular scaffolding for nodejs projects following clean arsitecture principles. ",
+  "keywords": [
+    "nodejs",
+    "module-generator",
+    "module",
+    "clean-architecture"
+  ],
+  "license": "MIT",
+  "author": "saul-paulus (ixspx)",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
