@@ -6,6 +6,7 @@ export default class <%= className %>UseCase {
 
   async execute(inputData) {
     // Logic for <%= className %>UseCase
-    return { success: true, data: inputData };
+    const result = await this.<%= camelName %>Repository.create(inputData);
+    return { success: true, data: result };
   }
 }

@@ -1,4 +1,5 @@
-const <%= className %>UseCase = require('./<%= className %>UseCase');
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import <%= className %>UseCase from './<%= className %>UseCase.js';
 
 describe('<%= className %>UseCase', () => {
   let useCase;
@@ -23,7 +24,7 @@ describe('<%= className %>UseCase', () => {
       const result = await useCase.execute(mockDto);
 
       expect(mockRepository.create).toHaveBeenCalledWith(mockDto);
-      expect(result).toEqual({ success: true, data: mockDto });
+      expect(result).toEqual({ success: true, data: mockResult });
     });
   });
 });

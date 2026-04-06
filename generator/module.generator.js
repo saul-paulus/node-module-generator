@@ -19,6 +19,9 @@ module.exports = async function (name) {
   // Create directories
   dirs.forEach((dir) => fs.ensureDirSync(path.join(basePath, dir)));
 
+  // Generate scoped package.json for ESM support
+  fs.writeJsonSync(path.join(basePath, "package.json"), { type: "module" }, { spaces: 2 });
+
   const templateData = {
     name,
     className: pascalCase(name),

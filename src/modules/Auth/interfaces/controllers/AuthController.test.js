@@ -1,4 +1,5 @@
-const AuthController = require('./AuthController');
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import AuthController from './AuthController.js';
 
 describe('AuthController', () => {
   let controller;

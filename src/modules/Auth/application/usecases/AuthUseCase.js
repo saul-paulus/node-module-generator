@@ -6,6 +6,7 @@ export default class AuthUseCase {
 
   async execute(inputData) {
     // Logic for AuthUseCase
-    return { success: true, data: inputData };
+    const result = await this.authRepository.create(inputData);
+    return { success: true, data: result };
   }
 }

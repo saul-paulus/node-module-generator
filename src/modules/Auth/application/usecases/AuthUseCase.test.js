@@ -1,4 +1,5 @@
-const AuthUseCase = require('./AuthUseCase');
+import { jest, describe, it, expect, beforeEach } from '@jest/globals';
+import AuthUseCase from './AuthUseCase.js';
 
 describe('AuthUseCase', () => {
   let useCase;
@@ -23,7 +24,7 @@ describe('AuthUseCase', () => {
       const result = await useCase.execute(mockDto);
 
       expect(mockRepository.create).toHaveBeenCalledWith(mockDto);
-      expect(result).toEqual({ success: true, data: mockDto });
+      expect(result).toEqual({ success: true, data: mockResult });
     });
   });
 });
