@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/saul-paulus/node-module-generator/main/assets/banner.png" alt="Node Module Generator Banner" width="600" style="max-width: 100%;" />
+  <img src="./assets/banner.png" alt="Node Module Generator Banner" width="600" style="max-width: 100%;" />
   <h1>🚀 Node Module Generator (NMG)</h1>
   <p><strong>The ultimate CLI companion for rapid, enterprise-grade Node.js scaffolding.</strong></p>
   <p>
