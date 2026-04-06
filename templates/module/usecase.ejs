@@ -1,10 +1,11 @@
-export default class <%= useCaseClassName %> {
-  constructor({ <%= camelName %>Repository }) {
+export default class <%= className %>UseCase {
+  constructor({ <%= camelName %>Repository, jwtService }) {
     this.<%= camelName %>Repository = <%= camelName %>Repository;
+    this.jwtService = jwtService;
   }
 
-  async execute(data) {
-    // Implement use case logic
-    return this.<%= camelName %>Repository.findById(data.id);
+  async execute(inputData) {
+    // Logic for <%= className %>UseCase
+    return { success: true, data: inputData };
   }
 }

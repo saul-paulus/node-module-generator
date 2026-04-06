@@ -1,6 +1,6 @@
-const <%= className %>Controller = require('./<%= className %>Controller');
+const AuthController = require('./AuthController');
 
-describe('<%= className %>Controller', () => {
+describe('AuthController', () => {
   let controller;
   let mockUseCase;
   let mockReq;
@@ -11,9 +11,9 @@ describe('<%= className %>Controller', () => {
     mockUseCase = {
       execute: jest.fn()
     };
-    controller = new <%= className %>Controller({ 
-      <%= camelName %>Repository: {}, 
-      <%= camelName %>UseCase: mockUseCase 
+    controller = new AuthController({ 
+      authRepository: {}, 
+      authUseCase: mockUseCase 
     });
     mockReq = {
       body: { test: 'data' }

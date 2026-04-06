@@ -1,4 +1,4 @@
-export default class <%= className %>Repository {
+export default class AuthRepository {
   async findById(id) {
     throw new Error('Method not implemented.');
   }

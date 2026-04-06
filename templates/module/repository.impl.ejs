@@ -8,4 +8,8 @@ export default class Prisma<%= className %>Repository {
       where: { id },
     });
   }
+
+  async create(data) {
+    return this.prisma.<%= camelName %>s.create({ data });
+  }
 }

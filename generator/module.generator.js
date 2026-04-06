@@ -19,12 +19,36 @@ module.exports = async function (name) {
   // Create directories
   dirs.forEach((dir) => fs.ensureDirSync(path.join(basePath, dir)));
 
-  console.log(`✔ Module ${name} directory structure created.`);
+  const templateData = {
+    name,
+    className: pascalCase(name),
+    camelName: camelCase(name),
+    useCaseClassName: `${pascalCase(name)}UseCase`,
+    useCaseFileName: `${name.toLowerCase()}.usecase`,
+  };
+
+  const renderAndWrite = async (templateName, outputPath) => {
+    const templateContent = await ejs.renderFile(
+      path.join(__dirname, "../templates/module", templateName),
+      templateData
+    );
+    fs.writeFileSync(path.join(basePath, outputPath), templateContent);
+  };
+
+  await renderAndWrite("controller.ejs", `interfaces/controllers/${pascalCase(name)}Controller.js`);
+  await renderAndWrite("controller.test.ejs", `interfaces/controllers/${pascalCase(name)}Controller.test.js`);
+  await renderAndWrite("route.ejs", `interfaces/routes/${name.toLowerCase()}.routes.js`);
   
-  // Optionally create an empty module DI file
-  const diFile = path.join(basePath, `${name}.module.js`);
-  if (!fs.existsSync(diFile)) {
-    fs.writeFileSync(diFile, `module.exports = function register${pascalCase(name)}Module(container) {\n  container.register({\n    // Inject dependencies here\n  });\n};\n`);
-    console.log(`✔ Module DI registry ${name}.module.js created.`);
-  }
+  await renderAndWrite("usecase.ejs", `application/usecases/${pascalCase(name)}UseCase.js`);
+  await renderAndWrite("usecase.test.ejs", `application/usecases/${pascalCase(name)}UseCase.test.js`);
+  
+  await renderAndWrite("entity.ejs", `domain/entities/${pascalCase(name)}.js`);
+  await renderAndWrite("repository.interface.ejs", `domain/repositories/${pascalCase(name)}Repository.js`);
+  
+  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/Prisma${pascalCase(name)}Repository.js`);
+  await renderAndWrite("dto.ejs", `application/dtos/${name.toLowerCase()}.dto.js`);
+  
+  await renderAndWrite("di.ejs", `${name}.module.js`);
+
+  console.log(`✔ Module ${name} directory structure, standard files, and tests created.`);
 };

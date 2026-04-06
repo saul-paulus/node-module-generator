@@ -1,6 +1,6 @@
-const <%= className %>UseCase = require('./<%= className %>UseCase');
+const AuthUseCase = require('./AuthUseCase');
 
-describe('<%= className %>UseCase', () => {
+describe('AuthUseCase', () => {
   let useCase;
   let mockRepository;
 
@@ -8,8 +8,8 @@ describe('<%= className %>UseCase', () => {
     mockRepository = {
       create: jest.fn()
     };
-    useCase = new <%= className %>UseCase({ 
-      <%= camelName %>Repository: mockRepository,
+    useCase = new AuthUseCase({ 
+      authRepository: mockRepository,
       jwtService: {} 
     });
   });

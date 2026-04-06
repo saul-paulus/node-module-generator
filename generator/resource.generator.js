@@ -22,8 +22,8 @@ module.exports = async function (name) {
     name,
     className: pascalCase(name),
     camelName: camelCase(name),
-    useCaseClassName: `Create${pascalCase(name)}UseCase`,
-    useCaseFileName: `Create${pascalCase(name)}UseCase`,
+    useCaseClassName: `${pascalCase(name)}UseCase`,
+    useCaseFileName: `${name.toLowerCase()}.usecase`,
   };
 
   const renderAndWrite = async (templateName, outputPath) => {
@@ -38,8 +38,8 @@ module.exports = async function (name) {
   await renderAndWrite("controller.test.ejs", `interfaces/controllers/${pascalCase(name)}Controller.test.js`);
   await renderAndWrite("route.ejs", `interfaces/routes/${name.toLowerCase()}.routes.js`);
   
-  await renderAndWrite("usecase.ejs", `application/usecases/Create${pascalCase(name)}UseCase.js`);
-  await renderAndWrite("usecase.test.ejs", `application/usecases/Create${pascalCase(name)}UseCase.test.js`);
+  await renderAndWrite("usecase.ejs", `application/usecases/${pascalCase(name)}UseCase.js`);
+  await renderAndWrite("usecase.test.ejs", `application/usecases/${pascalCase(name)}UseCase.test.js`);
   
   await renderAndWrite("entity.ejs", `domain/entities/${pascalCase(name)}.js`);
   await renderAndWrite("repository.interface.ejs", `domain/repositories/${pascalCase(name)}Repository.js`);

@@ -1,7 +1,9 @@
-import express from 'express';
-
+// routes
 export default ({ <%= camelName %>Controller }) => {
+  const express = require('express');
   const router = express.Router();
-  router.get('/:id', <%= camelName %>Controller.findById.bind(<%= camelName %>Controller));
+  
+  router.get('/', <%= camelName %>Controller.index.bind(<%= camelName %>Controller));
+  
   return router;
 };
