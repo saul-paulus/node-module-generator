@@ -1,8 +1,5 @@
-class <%= className %>Entity {
-  constructor({ id, ...props }) {
-    this.id = id;
+export default class <%= className %> {
+  constructor(props) {
     Object.assign(this, props);
   }
 }
-
-module.exports = <%= className %>Entity;

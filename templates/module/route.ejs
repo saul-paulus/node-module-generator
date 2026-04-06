@@ -1,9 +1,7 @@
-const { Router } = require('express');
+import express from 'express';
 
-module.exports = function({ <%= camelName %>Controller }) {
-  const router = Router();
-
-  router.post('/', <%= camelName %>Controller.create);
-
+export default ({ <%= camelName %>Controller }) => {
+  const router = express.Router();
+  router.get('/:id', <%= camelName %>Controller.findById.bind(<%= camelName %>Controller));
   return router;
 };

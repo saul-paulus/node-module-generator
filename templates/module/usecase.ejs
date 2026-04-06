@@ -1,15 +1,10 @@
-class <%= useCaseClassName %> {
+export default class <%= useCaseClassName %> {
   constructor({ <%= camelName %>Repository }) {
     this.<%= camelName %>Repository = <%= camelName %>Repository;
   }
 
-  async execute(dto) {
-    // Validate DTO...
-    // Apply business logic...
-    
-    const entity = await this.<%= camelName %>Repository.save(dto);
-    return entity;
+  async execute(data) {
+    // Implement use case logic
+    return this.<%= camelName %>Repository.findById(data.id);
   }
 }
-
-module.exports = <%= useCaseClassName %>;

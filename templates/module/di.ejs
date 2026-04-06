@@ -1,16 +1,15 @@
-const { asClass, asFunction } = require('awilix');
+import { asClass, asFunction } from 'awilix';
 
-const <%= className %>Controller = require('./interfaces/controllers/<%= name %>.controller');
-const create<%= className %>Routes = require('./interfaces/routes/<%= name %>.routes');
-const Create<%= className %>UseCase = require('./application/usecases/create-<%= name %>.usecase');
-const <%= className %>Repository = require('./infrastructure/repositories/<%= name %>.repository.impl');
+import <%= className %>Controller from './interfaces/controllers/<%= className %>Controller';
+import create<%= className %>Routes from './interfaces/routes/<%= name.toLowerCase() %>.routes';
+import Create<%= className %>UseCase from './application/usecases/Create<%= className %>UseCase';
+import Prisma<%= className %>Repository from './infrastructure/repositories/Prisma<%= className %>Repository';
 
-module.exports = function register<%= className %>Module(container) {
+export default function register<%= className %>Module(container) {
   container.register({
     <%= camelName %>Controller: asClass(<%= className %>Controller).singleton(),
     <%= camelName %>Routes: asFunction(create<%= className %>Routes).singleton(),
-    <%= camelName %>UseCase: asClass(Create<%= className %>UseCase).singleton(),
-    // Providing the interface's name as the injection token for the implementation
-    <%= camelName %>Repository: asClass(<%= className %>Repository).singleton(),
+    Create<%= className %>UseCase: asClass(Create<%= className %>UseCase).singleton(),
+    <%= camelName %>Repository: asFunction(({ prisma<%= className %>Repository }) => prisma<%= className %>Repository).scoped(),
   });
-};
+}

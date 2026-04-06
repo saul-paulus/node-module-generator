@@ -57,6 +57,7 @@ Scaffold specifically what you need, exactly how you do it in NestJS:
 # 1. Scaffolds a new module architecture and empty DI registry
 nmg module product
 
+
 # 2. Creates a specific Use Case and its Test inside an existing module
 nmg usecase updateProduct --module=product
 

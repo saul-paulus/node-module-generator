@@ -9,13 +9,9 @@ module.exports = async function (name) {
   const dirs = [
     "domain/entities",
     "domain/repositories",
-    "domain/services",
     "application/usecases",
     "application/dtos",
     "infrastructure/repositories",
-    "infrastructure/validation",
-    "infrastructure/security",
-    "infrastructure/services",
     "interfaces/controllers",
     "interfaces/routes",
   ];

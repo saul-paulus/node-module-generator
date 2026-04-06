@@ -1,23 +1,11 @@
-const I<%= className %>Repository = require('../../domain/repositories/<%= name %>.repository.interface');
-const <%= className %>Entity = require('../../domain/entities/<%= name %>.entity');
-
-class <%= className %>RepositoryImpl extends I<%= className %>Repository {
-  // If using Prisma, you would do: constructor({ prisma }) { super(); this.prisma = prisma; }
-  constructor() {
-    super();
-    this.db = new Map();
-  }
-
-  async save(dto) {
-    const id = Date.now().toString(); // Mock ID generation
-    const entity = new <%= className %>Entity({ id, ...dto });
-    this.db.set(id, entity);
-    return entity;
+export default class Prisma<%= className %>Repository {
+  constructor({ prisma }) {
+    this.prisma = prisma;
   }
 
   async findById(id) {
-    return this.db.get(id) || null;
+    return this.prisma.<%= camelName %>s.findUnique({
+      where: { id },
+    });
   }
 }
-
-module.exports = <%= className %>RepositoryImpl;

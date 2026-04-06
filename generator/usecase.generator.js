@@ -17,10 +17,10 @@ module.exports = async function (useCaseName, moduleName) {
   };
 
   const templateContent = await ejs.renderFile(path.join(__dirname, "../templates/module/usecase.ejs"), templateData);
-  fs.writeFileSync(path.join(ucDir, `${useCaseName}.usecase.js`), templateContent);
+  fs.writeFileSync(path.join(ucDir, `${pascalCase(useCaseName)}UseCase.js`), templateContent);
 
   const testContent = await ejs.renderFile(path.join(__dirname, "../templates/module/usecase.test.ejs"), templateData);
-  fs.writeFileSync(path.join(ucDir, `${useCaseName}.usecase.test.js`), testContent);
+  fs.writeFileSync(path.join(ucDir, `${pascalCase(useCaseName)}UseCase.test.js`), testContent);
 
   console.log(`✔ Usecase ${useCaseName} generated inside module ${moduleName}.`);
 };

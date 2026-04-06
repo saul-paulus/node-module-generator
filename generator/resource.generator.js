@@ -9,13 +9,9 @@ module.exports = async function (name) {
   const dirs = [
     "domain/entities",
     "domain/repositories",
-    "domain/services",
     "application/usecases",
     "application/dtos",
     "infrastructure/repositories",
-    "infrastructure/validation",
-    "infrastructure/security",
-    "infrastructure/services",
     "interfaces/controllers",
     "interfaces/routes",
   ];
@@ -27,7 +23,7 @@ module.exports = async function (name) {
     className: pascalCase(name),
     camelName: camelCase(name),
     useCaseClassName: `Create${pascalCase(name)}UseCase`,
-    useCaseFileName: `create-${name}`,
+    useCaseFileName: `Create${pascalCase(name)}UseCase`,
   };
 
   const renderAndWrite = async (templateName, outputPath) => {
@@ -38,18 +34,18 @@ module.exports = async function (name) {
     fs.writeFileSync(path.join(basePath, outputPath), templateContent);
   };
 
-  await renderAndWrite("controller.ejs", `interfaces/controllers/${name}.controller.js`);
-  await renderAndWrite("controller.test.ejs", `interfaces/controllers/${name}.controller.test.js`);
-  await renderAndWrite("route.ejs", `interfaces/routes/${name}.routes.js`);
+  await renderAndWrite("controller.ejs", `interfaces/controllers/${pascalCase(name)}Controller.js`);
+  await renderAndWrite("controller.test.ejs", `interfaces/controllers/${pascalCase(name)}Controller.test.js`);
+  await renderAndWrite("route.ejs", `interfaces/routes/${name.toLowerCase()}.routes.js`);
   
-  await renderAndWrite("usecase.ejs", `application/usecases/create-${name}.usecase.js`);
-  await renderAndWrite("usecase.test.ejs", `application/usecases/create-${name}.usecase.test.js`);
+  await renderAndWrite("usecase.ejs", `application/usecases/Create${pascalCase(name)}UseCase.js`);
+  await renderAndWrite("usecase.test.ejs", `application/usecases/Create${pascalCase(name)}UseCase.test.js`);
   
-  await renderAndWrite("entity.ejs", `domain/entities/${name}.entity.js`);
-  await renderAndWrite("repository.interface.ejs", `domain/repositories/${name}.repository.interface.js`);
+  await renderAndWrite("entity.ejs", `domain/entities/${pascalCase(name)}.js`);
+  await renderAndWrite("repository.interface.ejs", `domain/repositories/${pascalCase(name)}Repository.js`);
   
-  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/${name}.repository.impl.js`);
-  await renderAndWrite("dto.ejs", `infrastructure/validation/create-${name}.schema.js`);
+  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/Prisma${pascalCase(name)}Repository.js`);
+  await renderAndWrite("dto.ejs", `application/dtos/${name.toLowerCase()}.dto.js`);
   
   await renderAndWrite("di.ejs", `${name}.module.js`);
 

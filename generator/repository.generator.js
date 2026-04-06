@@ -28,9 +28,9 @@ module.exports = async function (moduleName) {
     fs.writeFileSync(path.join(basePath, outputPath), templateContent);
   };
 
-  await renderAndWrite("entity.ejs", `domain/entities/${moduleName}.entity.js`);
-  await renderAndWrite("repository.interface.ejs", `domain/repositories/${moduleName}.repository.interface.js`);
-  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/${moduleName}.repository.impl.js`);
+  await renderAndWrite("entity.ejs", `domain/entities/${pascalCase(moduleName)}.js`);
+  await renderAndWrite("repository.interface.ejs", `domain/repositories/${pascalCase(moduleName)}Repository.js`);
+  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/Prisma${pascalCase(moduleName)}Repository.js`);
 
   console.log(`✔ Repository patterns for ${moduleName} generated successfully.`);
 };

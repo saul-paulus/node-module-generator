@@ -1,16 +1,14 @@
-class <%= className %>Controller {
-  constructor({ <%= camelName %>UseCase }) {
-    this.<%= camelName %>UseCase = <%= camelName %>UseCase;
+export default class <%= className %>Controller {
+  constructor({ <%= camelName %>Repository }) {
+    this.<%= camelName %>Repository = <%= camelName %>Repository;
   }
 
-  create = async (req, res, next) => {
+  async findById(req, res, next) {
     try {
-      const result = await this.<%= camelName %>UseCase.execute(req.body);
-      res.status(201).json({ success: true, data: result });
+      const result = await this.<%= camelName %>Repository.findById(req.params.id);
+      res.json(result);
     } catch (error) {
       next(error);
     }
-  };
+  }
 }
-
-module.exports = <%= className %>Controller;
