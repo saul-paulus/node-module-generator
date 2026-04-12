@@ -1,6 +1,6 @@
 {
   "name": "@saulpaulus17/node-module-generator",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "CLI tool to grenerate modular scaffolding for nodejs projects following clean arsitecture principles. ",
   "keywords": [
     "nodejs",
