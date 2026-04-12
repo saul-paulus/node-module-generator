@@ -5,6 +5,11 @@ const program = new Command();
 
 program.name("nmg").version("1.0.0").description("Clean nodejs CLI");
 
+process.on("unhandledRejection", (err) => {
+  console.error("✖ FATAL ERROR: ", err.stack || err);
+  process.exit(1);
+});
+
 require("../commands/module.command")(program);
 require("../commands/usecase.command")(program);
 require("../commands/resource.command")(program);

@@ -1,21 +1,31 @@
 const path = require("path");
-const fs = require("fs-extra");
-const ejs = require("ejs");
 const { pascalCase, camelCase } = require("../utils/case.util");
+const FileUtil = require("../utils/file.util");
+const Logger = require("../utils/logger.util");
 
 module.exports = async function (schemaName, moduleName) {
-  const basePath = path.join(process.cwd(), "src/modules", moduleName);
-  const dtoDir = path.join(basePath, "application/dtos");
-  fs.ensureDirSync(dtoDir);
+  try {
+    Logger.info(`Starting generation for DTO: ${schemaName} in module: ${moduleName}`);
+    const basePath = path.join(process.cwd(), "src/modules", moduleName);
+    const dtoDir = "application/dtos";
+    
+    FileUtil.ensureDirectories(basePath, [dtoDir]);
 
-  const templateData = {
-    name: moduleName, 
-    className: pascalCase(schemaName),
-    camelName: camelCase(moduleName),
-  };
+    const templateData = {
+      name: moduleName, 
+      className: pascalCase(schemaName),
+      camelName: camelCase(moduleName),
+    };
 
-  const templateContent = await ejs.renderFile(path.join(__dirname, "../templates/module/dto.ejs"), templateData);
-  fs.writeFileSync(path.join(dtoDir, `${schemaName.toLowerCase()}.dto.js`), templateContent);
+    await FileUtil.renderAndWrite(
+      "module/dto.ejs",
+      templateData,
+      path.join(basePath, dtoDir, `${schemaName.toLowerCase()}.dto.js`)
+    );
 
-  console.log(`✔ DTO ${schemaName} generated inside module ${moduleName} at application/dtos.`);
+    Logger.success(`DTO ${schemaName} generated inside module ${moduleName} at application/dtos.`);
+  } catch (error) {
+    Logger.error(`Failed to generate DTO ${schemaName}`, error);
+    process.exit(1);
+  }
 };

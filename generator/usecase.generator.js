@@ -1,26 +1,39 @@
 const path = require("path");
-const fs = require("fs-extra");
-const ejs = require("ejs");
 const { pascalCase, camelCase } = require("../utils/case.util");
+const FileUtil = require("../utils/file.util");
+const Logger = require("../utils/logger.util");
 
 module.exports = async function (useCaseName, moduleName) {
-  const basePath = path.join(process.cwd(), "src/modules", moduleName);
-  const ucDir = path.join(basePath, "application/usecases");
-  fs.ensureDirSync(ucDir);
+  try {
+    Logger.info(`Starting usecase generation: ${useCaseName} in module: ${moduleName}`);
+    const basePath = path.join(process.cwd(), "src/modules", moduleName);
+    const ucDir = "application/usecases";
+    
+    FileUtil.ensureDirectories(basePath, [ucDir]);
 
-  const templateData = {
-    name: moduleName, 
-    className: pascalCase(moduleName),
-    camelName: camelCase(moduleName),
-    useCaseClassName: `${pascalCase(useCaseName)}UseCase`,
-    useCaseFileName: useCaseName, 
-  };
+    const templateData = {
+      name: moduleName, 
+      className: pascalCase(moduleName),
+      camelName: camelCase(moduleName),
+      useCaseClassName: `${pascalCase(useCaseName)}UseCase`,
+      useCaseFileName: useCaseName, 
+    };
 
-  const templateContent = await ejs.renderFile(path.join(__dirname, "../templates/module/usecase.ejs"), templateData);
-  fs.writeFileSync(path.join(ucDir, `${pascalCase(useCaseName)}UseCase.js`), templateContent);
+    await FileUtil.renderAndWrite(
+      "module/usecase.ejs",
+      templateData,
+      path.join(basePath, ucDir, `${pascalCase(useCaseName)}UseCase.js`)
+    );
 
-  const testContent = await ejs.renderFile(path.join(__dirname, "../templates/module/usecase.test.ejs"), templateData);
-  fs.writeFileSync(path.join(ucDir, `${pascalCase(useCaseName)}UseCase.test.js`), testContent);
+    await FileUtil.renderAndWrite(
+      "module/usecase.test.ejs",
+      templateData,
+      path.join(basePath, ucDir, `${pascalCase(useCaseName)}UseCase.test.js`)
+    );
 
-  console.log(`✔ Usecase ${useCaseName} generated inside module ${moduleName}.`);
+    Logger.success(`Usecase ${useCaseName} generated inside module ${moduleName}.`);
+  } catch (error) {
+    Logger.error(`Failed to generate usecase ${useCaseName}`, error);
+    process.exit(1);
+  }
 };

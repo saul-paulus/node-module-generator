@@ -1,36 +1,44 @@
 const path = require("path");
-const fs = require("fs-extra");
-const ejs = require("ejs");
 const { pascalCase, camelCase } = require("../utils/case.util");
+const FileUtil = require("../utils/file.util");
+const Logger = require("../utils/logger.util");
 
 module.exports = async function (moduleName) {
-  const basePath = path.join(process.cwd(), "src/modules", moduleName);
+  try {
+    Logger.info(`Starting repository pattern generation for module: ${moduleName}`);
+    const basePath = path.join(process.cwd(), "src/modules", moduleName);
 
-  const entityDir = path.join(basePath, "domain/entities");
-  const repoInterfaceDir = path.join(basePath, "domain/repositories");
-  const repoImplDir = path.join(basePath, "infrastructure/repositories");
+    const dirs = [
+      "domain/entities",
+      "domain/repositories",
+      "infrastructure/repositories",
+    ];
 
-  fs.ensureDirSync(entityDir);
-  fs.ensureDirSync(repoInterfaceDir);
-  fs.ensureDirSync(repoImplDir);
+    FileUtil.ensureDirectories(basePath, dirs);
 
-  const templateData = {
-    name: moduleName,
-    className: pascalCase(moduleName),
-    camelName: camelCase(moduleName),
-  };
+    const templateData = {
+      name: moduleName,
+      className: pascalCase(moduleName),
+      camelName: camelCase(moduleName),
+    };
 
-  const renderAndWrite = async (templateName, outputPath) => {
-    const templateContent = await ejs.renderFile(
-      path.join(__dirname, "../templates/module", templateName),
-      templateData
-    );
-    fs.writeFileSync(path.join(basePath, outputPath), templateContent);
-  };
+    const filesToGenerate = [
+      { tpl: "module/entity.ejs", out: `domain/entities/${pascalCase(moduleName)}.js` },
+      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${pascalCase(moduleName)}Repository.js` },
+      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/Prisma${pascalCase(moduleName)}Repository.js` }
+    ];
 
-  await renderAndWrite("entity.ejs", `domain/entities/${pascalCase(moduleName)}.js`);
-  await renderAndWrite("repository.interface.ejs", `domain/repositories/${pascalCase(moduleName)}Repository.js`);
-  await renderAndWrite("repository.impl.ejs", `infrastructure/repositories/Prisma${pascalCase(moduleName)}Repository.js`);
+    for (const file of filesToGenerate) {
+      await FileUtil.renderAndWrite(
+        file.tpl,
+        templateData,
+        path.join(basePath, file.out)
+      );
+    }
 
-  console.log(`✔ Repository patterns for ${moduleName} generated successfully.`);
+    Logger.success(`Repository patterns for ${moduleName} generated successfully.`);
+  } catch (error) {
+    Logger.error(`Failed to generate repository patterns for ${moduleName}`, error);
+    process.exit(1);
+  }
 };
