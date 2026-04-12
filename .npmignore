@@ -1,0 +1,9 @@
+__tests__/
+.github/
+.gitignore
+.npmignore
+src/
+release.yml
+.readme_update
+DOCS_STEPS.md
+assets/

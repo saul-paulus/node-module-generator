@@ -24,7 +24,11 @@ class FileUtil {
    */
   static async renderAndWrite(templatePath, data, outputPath) {
     try {
-      const absoluteTemplatePath = path.join(__dirname, "../templates", templatePath);
+      const absoluteTemplatePath = path.join(
+        __dirname,
+        "../templates",
+        templatePath,
+      );
       const templateContent = await ejs.renderFile(absoluteTemplatePath, data);
       fs.writeFileSync(outputPath, templateContent);
       logger.step(`Created ${path.basename(outputPath)}`);
