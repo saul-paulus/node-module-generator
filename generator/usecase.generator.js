@@ -1,5 +1,5 @@
 import path from "path";
-import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import { pascalCase, camelCase } from "../utils/case.util.js";
 import FileUtil from "../utils/file.util.js";
 import Logger from "../utils/logger.util.js";
 
@@ -14,21 +14,20 @@ export default async function (useCaseName, moduleName) {
     const templateData = {
       name: moduleName, 
       className: pascalCase(useCaseName),
-      camelName: camelCase(moduleName),
-      kebabName: kebabCase(useCaseName),
-      moduleKebabName: kebabCase(moduleName),
+      camelName: camelCase(useCaseName),
+      moduleCamelName: camelCase(moduleName),
     };
 
     await FileUtil.renderAndWrite(
       "module/usecase.ejs",
       templateData,
-      path.join(basePath, ucDir, `${kebabCase(useCaseName)}-use-case.js`)
+      path.join(basePath, ucDir, `${camelCase(useCaseName)}UseCase.js`)
     );
 
     await FileUtil.renderAndWrite(
       "module/usecase.test.ejs",
       templateData,
-      path.join(basePath, ucDir, `${kebabCase(useCaseName)}-use-case.test.js`)
+      path.join(basePath, ucDir, `${camelCase(useCaseName)}UseCase.test.js`)
     );
 
     Logger.success(`Usecase ${useCaseName} generated inside module ${moduleName}.`);

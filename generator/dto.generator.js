@@ -1,5 +1,5 @@
 import path from "path";
-import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import { pascalCase, camelCase } from "../utils/case.util.js";
 import FileUtil from "../utils/file.util.js";
 import Logger from "../utils/logger.util.js";
 
@@ -14,14 +14,14 @@ export default async function (schemaName, moduleName) {
     const templateData = {
       name: moduleName, 
       className: pascalCase(schemaName),
-      camelName: camelCase(moduleName),
-      kebabName: kebabCase(schemaName),
+      camelName: camelCase(schemaName),
+      moduleCamelName: camelCase(moduleName),
     };
 
     await FileUtil.renderAndWrite(
       "module/dto.ejs",
       templateData,
-      path.join(basePath, dtoDir, `${kebabCase(schemaName)}-dto.js`)
+      path.join(basePath, dtoDir, `${camelCase(schemaName)}Dto.js`)
     );
 
     Logger.success(`DTO ${schemaName} generated inside module ${moduleName} at application/dtos.`);

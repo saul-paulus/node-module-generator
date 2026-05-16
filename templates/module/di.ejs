@@ -1,9 +1,9 @@
 import { asClass, asFunction } from 'awilix';
 
-import <%= className %>Controller from './interfaces/controllers/<%= kebabName %>-controller.js';
-import create<%= className %>Routes from './interfaces/routes/<%= kebabName %>-routes.js';
-import <%= className %>UseCase from './application/usecases/<%= kebabName %>-use-case.js';
-import Prisma<%= className %>Repository from './infrastructure/repositories/prisma-<%= kebabName %>-repository.js';
+import <%= className %>Controller from './interfaces/controllers/<%= camelName %>Controller.js';
+import create<%= className %>Routes from './interfaces/routes/<%= camelName %>Routes.js';
+import <%= className %>UseCase from './application/usecases/<%= camelName %>UseCase.js';
+import Prisma<%= className %>Repository from './infrastructure/repositories/prisma<%= className %>Repository.js';
 
 export default function register<%= className %>Module(container) {
   container.register({

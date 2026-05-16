@@ -1,5 +1,5 @@
 import path from "path";
-import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import { pascalCase, camelCase } from "../utils/case.util.js";
 import FileUtil from "../utils/file.util.js";
 import Logger from "../utils/logger.util.js";
 
@@ -20,13 +20,12 @@ export default async function (moduleName) {
       name: moduleName,
       className: pascalCase(moduleName),
       camelName: camelCase(moduleName),
-      kebabName: kebabCase(moduleName),
     };
 
     const filesToGenerate = [
-      { tpl: "module/entity.ejs", out: `domain/entities/${kebabCase(moduleName)}-entity.js` },
-      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${kebabCase(moduleName)}-repository.js` },
-      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma-${kebabCase(moduleName)}-repository.js` }
+      { tpl: "module/entity.ejs", out: `domain/entities/${camelCase(moduleName)}Entity.js` },
+      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${camelCase(moduleName)}Repository.js` },
+      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma${pascalCase(moduleName)}Repository.js` }
     ];
 
     for (const file of filesToGenerate) {

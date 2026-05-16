@@ -1,5 +1,5 @@
 import path from "path";
-import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import { pascalCase, camelCase } from "../utils/case.util.js";
 import FileUtil from "../utils/file.util.js";
 import Logger from "../utils/logger.util.js";
 
@@ -24,20 +24,19 @@ export default async function (name) {
       name,
       className: pascalCase(name),
       camelName: camelCase(name),
-      kebabName: kebabCase(name),
     };
 
     const filesToGenerate = [
-      { tpl: "module/controller.ejs", out: `interfaces/controllers/${kebabCase(name)}-controller.js` },
-      { tpl: "module/controller.test.ejs", out: `interfaces/controllers/${kebabCase(name)}-controller.test.js` },
-      { tpl: "module/route.ejs", out: `interfaces/routes/${kebabCase(name)}-routes.js` },
-      { tpl: "module/usecase.ejs", out: `application/usecases/${kebabCase(name)}-use-case.js` },
-      { tpl: "module/usecase.test.ejs", out: `application/usecases/${kebabCase(name)}-use-case.test.js` },
-      { tpl: "module/entity.ejs", out: `domain/entities/${kebabCase(name)}-entity.js` },
-      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${kebabCase(name)}-repository.js` },
-      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma-${kebabCase(name)}-repository.js` },
-      { tpl: "module/dto.ejs", out: `application/dtos/${kebabCase(name)}-dto.js` },
-      { tpl: "module/di.ejs", out: `${kebabCase(name)}.module.js` }
+      { tpl: "module/controller.ejs", out: `interfaces/controllers/${camelCase(name)}Controller.js` },
+      { tpl: "module/controller.test.ejs", out: `interfaces/controllers/${camelCase(name)}Controller.test.js` },
+      { tpl: "module/route.ejs", out: `interfaces/routes/${camelCase(name)}Routes.js` },
+      { tpl: "module/usecase.ejs", out: `application/usecases/${camelCase(name)}UseCase.js` },
+      { tpl: "module/usecase.test.ejs", out: `application/usecases/${camelCase(name)}UseCase.test.js` },
+      { tpl: "module/entity.ejs", out: `domain/entities/${camelCase(name)}Entity.js` },
+      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${camelCase(name)}Repository.js` },
+      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma${pascalCase(name)}Repository.js` },
+      { tpl: "module/dto.ejs", out: `application/dtos/${camelCase(name)}Dto.js` },
+      { tpl: "module/di.ejs", out: `${camelCase(name)}.module.js` }
     ];
 
     for (const file of filesToGenerate) {
