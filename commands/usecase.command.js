@@ -1,6 +1,6 @@
-const generateUsecase = require("../generator/usecase.generator");
+import generateUsecase from "../generator/usecase.generator.js";
 
-module.exports = (program) => {
+export default (program) => {
   program
     .command("usecase <name>")
     .description("Create a new usecase inside an existing module")

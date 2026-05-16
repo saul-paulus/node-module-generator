@@ -1,6 +1,6 @@
-const generateModule = require("../generator/module.generator");
+import generateModule from "../generator/module.generator.js";
 
-module.exports = (program) => {
+export default (program) => {
   program
     .command("module <name>")
     .description("Create a new module")

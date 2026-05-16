@@ -1,9 +1,9 @@
-const path = require("path");
-const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
-const FileUtil = require("../utils/file.util");
-const Logger = require("../utils/logger.util");
+import path from "path";
+import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import FileUtil from "../utils/file.util.js";
+import Logger from "../utils/logger.util.js";
 
-module.exports = async function (name) {
+export default async function (name) {
   try {
     Logger.info(`Starting generation for module: ${name}`);
     const basePath = path.join(process.cwd(), "src/modules", name);
@@ -53,4 +53,4 @@ module.exports = async function (name) {
     Logger.error(`Failed to generate module ${name}`, error);
     process.exit(1);
   }
-};
+}

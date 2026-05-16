@@ -1,9 +1,9 @@
-const generateResource = require("../generator/resource.generator");
+import generateResource from "../generator/resource.generator.js";
 
-module.exports = (program) => {
+export default (program) => {
   program
     .command("resource <name>")
-    .description("Create a new resource")
+    .description("Create a complete resource (CRUD)")
     .action((name) => {
       generateResource(name);
     });

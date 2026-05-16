@@ -1,6 +1,6 @@
-const chalk = require("chalk");
+import chalk from "chalk";
 
-class Logger {
+export default class Logger {
   static info(message) {
     console.log(chalk.blue("ℹ INFO: ") + message);
   }
@@ -28,5 +28,3 @@ class Logger {
     console.log(chalk.cyan("➜ ") + message);
   }
 }
-
-module.exports = Logger;

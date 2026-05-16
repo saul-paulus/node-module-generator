@@ -10,7 +10,7 @@
   ],
   "license": "MIT",
   "author": "saul-paulus (ixspx)",
-  "type": "commonjs",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saul-paulus/node-module-generator.git"

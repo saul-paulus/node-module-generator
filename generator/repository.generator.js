@@ -1,9 +1,9 @@
-const path = require("path");
-const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
-const FileUtil = require("../utils/file.util");
-const Logger = require("../utils/logger.util");
+import path from "path";
+import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
+import FileUtil from "../utils/file.util.js";
+import Logger from "../utils/logger.util.js";
 
-module.exports = async function (moduleName) {
+export default async function (moduleName) {
   try {
     Logger.info(`Starting repository pattern generation for module: ${moduleName}`);
     const basePath = path.join(process.cwd(), "src/modules", moduleName);
@@ -41,4 +41,4 @@ module.exports = async function (moduleName) {
     Logger.error(`Failed to generate repository patterns for ${moduleName}`, error);
     process.exit(1);
   }
-};
+}

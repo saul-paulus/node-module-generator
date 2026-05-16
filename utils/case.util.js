@@ -1,4 +1,4 @@
-exports.pascalCase = (str) => {
+export const pascalCase = (str) => {
   // Split on hyphens, underscores, or camelCase boundaries
   const words =
     str.replace(/([a-z])([A-Z])/g, "$1 $2").match(/[a-z0-9]+/gi) || [];
@@ -7,7 +7,7 @@ exports.pascalCase = (str) => {
     .join("");
 };
 
-exports.camelCase = (str) => {
+export const camelCase = (str) => {
   const words =
     str.replace(/([a-z])([A-Z])/g, "$1 $2").match(/[a-z0-9]+/gi) || [];
   if (!words.length) return "";
@@ -20,7 +20,7 @@ exports.camelCase = (str) => {
   );
 };
 
-exports.kebabCase = (str) => {
+export const kebabCase = (str) => {
   const words =
     str.replace(/([a-z])([A-Z])/g, "$1 $2").match(/[a-z0-9]+/gi) || [];
   return words.map((w) => w.toLowerCase()).join("-");

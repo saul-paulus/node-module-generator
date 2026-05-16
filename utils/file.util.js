@@ -1,7 +1,11 @@
-const fs = require("fs-extra");
-const path = require("path");
-const ejs = require("ejs");
-const logger = require("./logger.util");
+import fs from "fs-extra";
+import path from "path";
+import ejs from "ejs";
+import logger from "./logger.util.js";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class FileUtil {
   /**
@@ -39,4 +43,4 @@ class FileUtil {
   }
 }
 
-module.exports = FileUtil;
+export default FileUtil;

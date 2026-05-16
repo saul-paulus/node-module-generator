@@ -1,9 +1,9 @@
-const generateDto = require("../generator/dto.generator");
+import generateDto from "../generator/dto.generator.js";
 
-module.exports = (program) => {
+export default (program) => {
   program
     .command("dto <name>")
-    .description("Create a new DTO (validation schema)")
+    .description("Create a new DTO inside an existing module")
     .option("-m, --module <moduleName>", "Specify the target module")
     .action((name, options) => {
       if (!options.module) {
