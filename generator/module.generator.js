@@ -25,6 +25,7 @@ export default async function (name) {
       name,
       className: pascalCase(name),
       camelName: camelCase(name),
+      kebabName: kebabCase(name),
     };
 
     const filesToGenerate = [

@@ -1,15 +1,15 @@
 import { asClass, asFunction } from 'awilix';
 
-import <%= className %>Controller from './interfaces/controllers/<%= className %>Controller';
-import create<%= className %>Routes from './interfaces/routes/<%= name.toLowerCase() %>.routes';
-import Create<%= className %>UseCase from './application/usecases/Create<%= className %>UseCase';
-import Prisma<%= className %>Repository from './infrastructure/repositories/Prisma<%= className %>Repository';
+import <%= className %>Controller from './interfaces/controllers/<%= kebabName %>-controller.js';
+import create<%= className %>Routes from './interfaces/routes/<%= kebabName %>-routes.js';
+import <%= className %>UseCase from './application/usecases/<%= kebabName %>-use-case.js';
+import Prisma<%= className %>Repository from './infrastructure/repositories/prisma-<%= kebabName %>-repository.js';
 
 export default function register<%= className %>Module(container) {
   container.register({
     <%= camelName %>Controller: asClass(<%= className %>Controller).singleton(),
     <%= camelName %>Routes: asFunction(create<%= className %>Routes).singleton(),
-    Create<%= className %>UseCase: asClass(Create<%= className %>UseCase).singleton(),
-    <%= camelName %>Repository: asFunction(({ prisma<%= className %>Repository }) => prisma<%= className %>Repository).scoped(),
+    <%= camelName %>UseCase: asClass(<%= className %>UseCase).singleton(),
+    <%= camelName %>Repository: asClass(Prisma<%= className %>Repository).singleton(),
   });
 }

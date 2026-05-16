@@ -15,6 +15,8 @@ export default async function (useCaseName, moduleName) {
       name: moduleName, 
       className: pascalCase(useCaseName),
       camelName: camelCase(moduleName),
+      kebabName: kebabCase(useCaseName),
+      moduleKebabName: kebabCase(moduleName),
     };
 
     await FileUtil.renderAndWrite(

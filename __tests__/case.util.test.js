@@ -1,4 +1,4 @@
-const { pascalCase, camelCase } = require("../utils/case.util");
+import { pascalCase, camelCase, kebabCase } from "../utils/case.util.js";
 
 describe("Case Utility", () => {
   describe("pascalCase", () => {
@@ -30,6 +30,20 @@ describe("Case Utility", () => {
 
     it("should return empty string for empty input", () => {
       expect(camelCase("")).toBe("");
+    });
+  });
+
+  describe("kebabCase", () => {
+    it("should convert PascalCase to kebab-case", () => {
+      expect(kebabCase("HelloWorld")).toBe("hello-world");
+    });
+
+    it("should convert space separated words to kebab-case", () => {
+      expect(kebabCase("hello world")).toBe("hello-world");
+    });
+
+    it("should convert underscore separated words to kebab-case", () => {
+      expect(kebabCase("hello_world")).toBe("hello-world");
     });
   });
 });

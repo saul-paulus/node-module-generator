@@ -20,6 +20,7 @@ export default async function (moduleName) {
       name: moduleName,
       className: pascalCase(moduleName),
       camelName: camelCase(moduleName),
+      kebabName: kebabCase(moduleName),
     };
 
     const filesToGenerate = [
