@@ -37,7 +37,7 @@ export default async function (name) {
       { tpl: "module/repository.interface.ejs", out: `domain/repositories/${camelCase(name)}Repository.js` },
       { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma${pascalCase(name)}Repository.js` },
       { tpl: "module/dto.ejs", out: `application/dtos/${camelCase(name)}Dto.js` },
-      { tpl: "module/di.ejs", out: `${camelCase(name)}.module.js` }
+      { tpl: "module/di.ejs", out: `${name}.module.js` }
     ];
 
     for (const file of filesToGenerate) {
