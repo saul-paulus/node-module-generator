@@ -1,15 +1,8 @@
-import { asClass, asFunction } from 'awilix';
-
-import <%= className %>Controller from './interfaces/controllers/<%= camelName %>Controller.js';
-import create<%= className %>Routes from './interfaces/routes/<%= camelName %>Routes.js';
-import <%= className %>UseCase from './application/usecases/<%= camelName %>UseCase.js';
-import Prisma<%= className %>Repository from './infrastructure/repositories/prisma<%= className %>Repository.js';
+import { asFunction } from 'awilix';
 
 export default function register<%= className %>Module(container) {
   container.register({
-    <%= camelName %>Controller: asClass(<%= className %>Controller).singleton(),
-    <%= camelName %>Routes: asFunction(create<%= className %>Routes).singleton(),
-    <%= camelName %>UseCase: asClass(<%= className %>UseCase).singleton(),
-    <%= camelName %>Repository: asClass(Prisma<%= className %>Repository).singleton(),
+    <%= camelName %>Repository: asFunction(({ prisma<%= className %>Repository }) => prisma<%= className %>Repository).scoped(),
   });
 }
+

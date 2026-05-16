@@ -14,8 +14,8 @@ export default async function (useCaseName, moduleName) {
     const templateData = {
       name: moduleName, 
       className: pascalCase(useCaseName),
-      camelName: camelCase(useCaseName),
-      moduleCamelName: camelCase(moduleName),
+      camelName: camelCase(moduleName), // This is used for the repository name
+      useCaseCamelName: camelCase(useCaseName),
     };
 
     await FileUtil.renderAndWrite(
