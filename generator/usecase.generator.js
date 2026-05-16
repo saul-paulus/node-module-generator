@@ -1,5 +1,5 @@
 const path = require("path");
-const { pascalCase, camelCase } = require("../utils/case.util");
+const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
 const FileUtil = require("../utils/file.util");
 const Logger = require("../utils/logger.util");
 
@@ -13,22 +13,20 @@ module.exports = async function (useCaseName, moduleName) {
 
     const templateData = {
       name: moduleName, 
-      className: pascalCase(moduleName),
+      className: pascalCase(useCaseName),
       camelName: camelCase(moduleName),
-      useCaseClassName: `${pascalCase(useCaseName)}UseCase`,
-      useCaseFileName: useCaseName, 
     };
 
     await FileUtil.renderAndWrite(
       "module/usecase.ejs",
       templateData,
-      path.join(basePath, ucDir, `${pascalCase(useCaseName)}UseCase.js`)
+      path.join(basePath, ucDir, `${kebabCase(useCaseName)}-use-case.js`)
     );
 
     await FileUtil.renderAndWrite(
       "module/usecase.test.ejs",
       templateData,
-      path.join(basePath, ucDir, `${pascalCase(useCaseName)}UseCase.test.js`)
+      path.join(basePath, ucDir, `${kebabCase(useCaseName)}-use-case.test.js`)
     );
 
     Logger.success(`Usecase ${useCaseName} generated inside module ${moduleName}.`);

@@ -1,5 +1,5 @@
 const path = require("path");
-const { pascalCase, camelCase } = require("../utils/case.util");
+const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
 const FileUtil = require("../utils/file.util");
 const Logger = require("../utils/logger.util");
 
@@ -20,7 +20,7 @@ module.exports = async function (schemaName, moduleName) {
     await FileUtil.renderAndWrite(
       "module/dto.ejs",
       templateData,
-      path.join(basePath, dtoDir, `${schemaName.toLowerCase()}.dto.js`)
+      path.join(basePath, dtoDir, `${kebabCase(schemaName)}-dto.js`)
     );
 
     Logger.success(`DTO ${schemaName} generated inside module ${moduleName} at application/dtos.`);

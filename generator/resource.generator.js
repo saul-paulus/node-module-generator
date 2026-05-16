@@ -1,5 +1,5 @@
 const path = require("path");
-const { pascalCase, camelCase } = require("../utils/case.util");
+const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
 const FileUtil = require("../utils/file.util");
 const Logger = require("../utils/logger.util");
 
@@ -24,21 +24,19 @@ module.exports = async function (name) {
       name,
       className: pascalCase(name),
       camelName: camelCase(name),
-      useCaseClassName: `${pascalCase(name)}UseCase`,
-      useCaseFileName: `${name.toLowerCase()}.usecase`,
     };
 
     const filesToGenerate = [
-      { tpl: "module/controller.ejs", out: `interfaces/controllers/${pascalCase(name)}Controller.js` },
-      { tpl: "module/controller.test.ejs", out: `interfaces/controllers/${pascalCase(name)}Controller.test.js` },
-      { tpl: "module/route.ejs", out: `interfaces/routes/${name.toLowerCase()}.routes.js` },
-      { tpl: "module/usecase.ejs", out: `application/usecases/${pascalCase(name)}UseCase.js` },
-      { tpl: "module/usecase.test.ejs", out: `application/usecases/${pascalCase(name)}UseCase.test.js` },
-      { tpl: "module/entity.ejs", out: `domain/entities/${pascalCase(name)}.js` },
-      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${pascalCase(name)}Repository.js` },
-      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/Prisma${pascalCase(name)}Repository.js` },
-      { tpl: "module/dto.ejs", out: `application/dtos/${name.toLowerCase()}.dto.js` },
-      { tpl: "module/di.ejs", out: `${name}.module.js` }
+      { tpl: "module/controller.ejs", out: `interfaces/controllers/${kebabCase(name)}-controller.js` },
+      { tpl: "module/controller.test.ejs", out: `interfaces/controllers/${kebabCase(name)}-controller.test.js` },
+      { tpl: "module/route.ejs", out: `interfaces/routes/${kebabCase(name)}-routes.js` },
+      { tpl: "module/usecase.ejs", out: `application/usecases/${kebabCase(name)}-use-case.js` },
+      { tpl: "module/usecase.test.ejs", out: `application/usecases/${kebabCase(name)}-use-case.test.js` },
+      { tpl: "module/entity.ejs", out: `domain/entities/${kebabCase(name)}-entity.js` },
+      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${kebabCase(name)}-repository.js` },
+      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma-${kebabCase(name)}-repository.js` },
+      { tpl: "module/dto.ejs", out: `application/dtos/${kebabCase(name)}-dto.js` },
+      { tpl: "module/di.ejs", out: `${kebabCase(name)}.module.js` }
     ];
 
     for (const file of filesToGenerate) {

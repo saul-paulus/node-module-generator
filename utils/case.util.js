@@ -19,3 +19,9 @@ exports.camelCase = (str) => {
       .join("")
   );
 };
+
+exports.kebabCase = (str) => {
+  const words =
+    str.replace(/([a-z])([A-Z])/g, "$1 $2").match(/[a-z0-9]+/gi) || [];
+  return words.map((w) => w.toLowerCase()).join("-");
+};

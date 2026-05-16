@@ -1,5 +1,5 @@
 const path = require("path");
-const { pascalCase, camelCase } = require("../utils/case.util");
+const { pascalCase, camelCase, kebabCase } = require("../utils/case.util");
 const FileUtil = require("../utils/file.util");
 const Logger = require("../utils/logger.util");
 
@@ -23,9 +23,9 @@ module.exports = async function (moduleName) {
     };
 
     const filesToGenerate = [
-      { tpl: "module/entity.ejs", out: `domain/entities/${pascalCase(moduleName)}.js` },
-      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${pascalCase(moduleName)}Repository.js` },
-      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/Prisma${pascalCase(moduleName)}Repository.js` }
+      { tpl: "module/entity.ejs", out: `domain/entities/${kebabCase(moduleName)}-entity.js` },
+      { tpl: "module/repository.interface.ejs", out: `domain/repositories/${kebabCase(moduleName)}-repository.js` },
+      { tpl: "module/repository.impl.ejs", out: `infrastructure/repositories/prisma-${kebabCase(moduleName)}-repository.js` }
     ];
 
     for (const file of filesToGenerate) {
