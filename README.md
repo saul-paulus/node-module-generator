@@ -49,7 +49,7 @@ graph TD
 - 💎 **Clean Architecture by Design**: Strict separation into Domain, Application, Infrastructure, and Interface layers.
 - 💉 **Native Dependency Injection**: Fully pre-configured for **Awilix**, providing seamless DI management.
 - 🧪 **Test-Ready Scaffolding**: Automatically generates **Jest** test suites for Controllers and Use Cases.
-- 🚀 **Modern Tooling**: Native support for **ES Modules (ESM)**, **Prisma ORM**, and **Joi/Zod** DTO patterns.
+- 🚀 **Full ESM Support**: Native support for **ECMAScript Modules (ESM)** with consistent **kebab-case** file naming.
 - 🤖 **Granular Control**: Generate full modules or individual components (UseCases, Repos, DTOs) without disrupting existing code.
 
 ---
@@ -127,25 +127,25 @@ Scaffolding a module (e.g., `nmg module Product`) produces the following industr
 ```text
 src/modules/Product/
 ├── application/                 
-│   ├── dtos/                    # DTO schemas (e.g., product.dto.js)
+│   ├── dtos/                    # DTO schemas (e.g., product-dto.js)
 │   └── usecases/                # Business orchestration
-│       ├── ProductUseCase.js    # Logic implementation
-│       └── ProductUseCase.test.js # Unit tests
+│       ├── product-use-case.js  # Logic implementation
+│       └── product-use-case.test.js # Unit tests
 ├── domain/                      
 │   ├── entities/                # Business entity definitions
-│   │   └── Product.js
+│   │   └── product-entity.js
 │   └── repositories/            # Repository Interface (Contracts)
-│       └── ProductRepository.js
+│       └── product-repository.js
 ├── infrastructure/              
 │   ├── repositories/            # Implementation (default: Prisma)
-│   │   └── PrismaProductRepository.js
+│   │   └── prisma-product-repository.js
 ├── interfaces/                  
 │   ├── controllers/             # Express handlers
-│   │   ├── ProductController.js
-│   │   └── ProductController.test.js
+│   │   ├── product-controller.js
+│   │   └── product-controller.test.js
 │   └── routes/                  # Express routes & method binding
-│       └── product.routes.js
-└── Product.module.js            # Central Awilix Module Registration
+│       └── product-routes.js
+└── product.module.js            # Central Awilix Module Registration
 ```
 
 ---
@@ -157,7 +157,8 @@ To finalize your new module integration, follow these standard steps:
 1.  **DI Registration**: Open `src/container.js` and register any specific repository aliases or scoped usecases.
 2.  **Route Mounting**: Mount the generated router in `src/app.js`:
     ```javascript
-    app.use('/api/v1/product', container.resolve('productRoutes'));
+    import productRoutes from './modules/Product/interfaces/routes/product-routes.js';
+    app.use('/api/v1/product', productRoutes);
     ```
 3.  **Detailed Implementation**: Build out the specific logic in the generated templates (which are already integrated via Awilix).
 
