@@ -1,6 +1,6 @@
 {
   "name": "@saulpaulus17/node-module-generator",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "CLI tool to grenerate modular scaffolding for nodejs projects following clean arsitecture principles. ",
   "keywords": [
     "nodejs",
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/saul-paulus/node-module-generator#readme",
   "main": "index.js",
   "bin": {
-    "nmg": "./bin/cli.js"
+    "nmg": "bin/cli.js"
   },
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
